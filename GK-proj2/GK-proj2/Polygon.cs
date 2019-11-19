@@ -11,6 +11,7 @@ namespace GK_proj2
     {
         public List<Point> points;
         public bool Completed = false;
+        public Point FarRight;
         public Polygon()
         {
             points = new List<Point>();
@@ -124,6 +125,15 @@ namespace GK_proj2
 
             // Return true if count is odd, false otherwise 
             return (count % 2 == 1);
+        }
+
+        public void Add(Point p)
+        {
+            if (FarRight == null)
+                FarRight = p;
+            else if (p.X > FarRight.X)
+                FarRight = p;
+            points.Add(p);
         }
     }
 }
