@@ -259,29 +259,12 @@ namespace GK_proj2
                 {
                     foreach (Polygon p2 in MovingPolygons)
                     {
-                        //List<Polygon> ClippedPolys = WeilerAthertonClip.GetClippedPolygons(p1, p2);
-                        //for (int ii = 0; ii < ClippedPolys.Count; ii++)
-                        //{
-                        //    FillPoly(ClippedPolys[ii]);
-                        //}
                         foreach (Polygon p3 in WeilerAthertonClip.GetClippedPolygons(p1, p2))
                         {
                             FillPoly(p3);
                         }
                     }
                 }
-            //if (ClipCheckbox.Checked)
-            //    foreach (Polygon p1 in polygons)
-            //    {
-            //        foreach (Polygon p2 in MovingPolygons)
-            //        {
-            //            foreach (Polygon p3 in WeilerAthertonClip.GetClippedPolygons(p1, p2))
-            //            {
-            //                FillPoly(p3);
-            //            }
-            //        }
-            //    }
-
             drawVertice(LightP, Color.Red);
 
 
@@ -294,13 +277,27 @@ namespace GK_proj2
             if (x < 0) x = 0;
             if (y < 0) y = 0;
             Color TC = Texture.GetPixel(x % Texture.Width, y % Texture.Height);
-            double r = TC.R / 255D, g = TC.G / 255D, b = TC.B / 255D;
+            double r = TC.R / 255D;
+            double g = TC.G / 255D;
+            double b = TC.B / 255D;
             Color N = NormalMap.GetPixel(x % NormalMap.Width, y % NormalMap.Height);
             Color NX = NormalMap.GetPixel((x + 1) % NormalMap.Width, y % NormalMap.Height);
             Color NY = NormalMap.GetPixel(x % NormalMap.Width, (y + 1) % NormalMap.Height);
-            double normX = (N.R / 255D), normY = (N.G / 255D), normZ = (N.B / 255D);
-            double BX = (NX.R - N.R) / 255D, BY = (NY.R - N.R) / 255D;
-            double cos = (BX * Math.Abs(LightP.X - x) + BY * Math.Abs(LightP.Y - y) + LightZ) / Math.Sqrt((LightP.X - x) * (LightP.X - x) + (LightP.Y - y) * (LightP.Y - y) + LightZ * LightZ);
+            double DX = (NX.R - N.R) / 255D;
+            double DY = (NY.R - N.R) / 255D;
+            double DZ = 1D;
+            double DLength = Math.Sqrt(DX * DX + DY * DY + 1);
+            DX /= DLength;
+            DY /= DLength;
+            DZ /= DLength;
+            double ToLightX = LightP.X - x;
+            double ToLightY = LightP.Y - y;
+            double ToLightZ = LightZ;
+            double ToLightLength = Math.Sqrt(ToLightX * ToLightX + ToLightY * ToLightY + ToLightZ * ToLightZ);
+            ToLightX /= ToLightLength;
+            ToLightY /= ToLightLength;
+            ToLightZ /= ToLightLength;
+            double cos = DX * ToLightX + DY * ToLightY + DZ * ToLightZ;
 
             r = r * (LightColor.R / 255D) * cos;
             g = g * (LightColor.G / 255D) * cos;
@@ -308,7 +305,7 @@ namespace GK_proj2
             if (r < 0) r = 0;
             if (g < 0) g = 0;
             if (b < 0) b = 0;
-            return Color.FromArgb((int)(r * 255) % 255, (int)(g * 255) % 255, (int)(b * 255) % 255);
+            return Color.FromArgb((int)(r * 255D) % 255, (int)(g * 255D) % 255, (int)(b * 255D) % 255);
         }
 
 
