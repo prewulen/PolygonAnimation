@@ -1,2 +1,32 @@
 # PolygonAnimation
-GK projekt 2
+![obraz](https://user-images.githubusercontent.com/56601065/119565129-da07d080-bda9-11eb-8add-2616651f6fc7.png)
+
+--Instrukcja obslugi--
+
+A. Wstep
+
+W centralnym polu znajduje sie miejsce animacji.
+Po prawej znajduja sie kontrolki opisane nizej.
+Na gorze znajduje sie pasek z narzedziami do tworzenia wielkatow.
+
+B. Opis narzedzi na gorze
+1. Add polygon - gdy narzedzie jest aktywne klikajac na miejscu animacji dodajemy kolejne wierzcholki wielokata. Aby zakonczyc tworzenie wielokata klikamy na pierwszy wierzcholek.
+2. Delete polygon - Usuwanie wielokatow poprzez klikniecie wewnatrz nich.
+3. Move polygon - przesuwanie wielokata badz jego wierzcholka. Zmiany widoczne dopiero po puszczeniu przycisku myszy.
+
+C. Opis narzedzi po prawej stronie
+1. Start/Stop - aktywuje/zatrzymuje animacje.
+2. Choose light position - wybor punktu, w ktorym znajduje sie zrodlo swiatla.
+3. Light Z - odleglosc swiatla od ekranu.
+4. Speed - Liczba milisekund pomiedzy generowaniem kolejnych klatek animacji.
+5. Spawn poly - podczas animacji generuje losowy wielokat wypukly poruszajacy sie po ekranie od prawej do lewej.
+6. Pick light color - wybor koloru swiatla.
+7. Use interpolation - wybor czy ma byc uzywana interpolacja koloru z wierzcholkow.
+8. Use clipping - wybor czy wielokaty poruszajace sie po ekranie maja byc obcinane.
+9. Fill moving polygons - wybor czy wielokaty poruszajace sie po ekranie maja byc wypelniane.
+10. Fill static polygons - wybor czy wielokaty dodane przez uzytkownika maja byc wypelniane.
+11. Pick texture - wybor tekstury bazowej.
+12. Pick bump map - wybor tekstury uzywanej do algorytmu bump mapping.
+
+D. Uwagi
+1. Aby algorytm obcinania dzialal poprawnie musimy tworzyc wielokat stawiajac wierzcholki zgodnie z kierunkiem wskazowek zegara.
